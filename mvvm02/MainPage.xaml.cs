@@ -22,9 +22,20 @@ namespace mvvm02
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        Comando _comando;
+        List<Registro> _registro;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            _comando = new Comando(); //TODO: ¿cómo se escribe esto en sugar candy?
+            DataContext = _comando;
+
+            _comando.HanPulsado += AccionesBotones.MostrarResultado; //TODO: ¿cómo saco esto de aquí?
+            _registro = new List<Registro>();    
+                                    
         }
+
     }
 }

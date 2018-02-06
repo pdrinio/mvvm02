@@ -8,6 +8,28 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="20,20,20,20">
+            <CalendarDatePicker x:Name="calendario" HorizontalAlignment="Center" PlaceholderText="Escoge el día..."></CalendarDatePicker>
+            <TextBlock Text="Inicializando..." HorizontalAlignment="Center" Margin="20,20,20,20" FontSize="24"></TextBlock>
+        </StackPanel>
+        
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,20,20,20">
+            <Button x:Name="btnEntrada" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
+                   FontSize="24" Content="ENTRADA" Command="{Binding}" CommandParameter="ENTRADA"></Button>
+            <Rectangle HorizontalAlignment="Center" Width="50" ></Rectangle>
+            <Button x:Name="btnSalida" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
+                    FontSize="24" Content="SALIDA" Command="{Binding}" CommandParameter="SALIDA" ></Button>
+            <Rectangle HorizontalAlignment="Center" Width="50" ></Rectangle>
+            <Button x:Name="btnRegistro" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
+                    FontSize="24" Content="REGISTRO" Command="{Binding}" CommandParameter="REGISTRO" ></Button>
+        </StackPanel>
     </Grid>
 </Page>
