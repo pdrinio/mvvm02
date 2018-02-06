@@ -10,5 +10,11 @@ namespace mvvm02
     {
         public DateTime Fecha {get; set;}
         public string Nombre { get; set; }
+
+        public Registro(DateTime fecha, string nombre)
+        {
+            this.Fecha = fecha;
+            this.Nombre = nombre;
+        }
     }
 }

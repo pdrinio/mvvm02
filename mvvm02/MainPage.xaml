@@ -12,6 +12,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -19,17 +20,18 @@
             <CalendarDatePicker x:Name="calendario" HorizontalAlignment="Center" PlaceholderText="Escoge el día..."></CalendarDatePicker>
             <TextBlock Text="Inicializando..." HorizontalAlignment="Center" Margin="20,20,20,20" FontSize="24"></TextBlock>
         </StackPanel>
-        
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,20,20,20">
+        <TextBox Grid.Row="2" HorizontalAlignment="Center" x:Name="txbNombre" Text="{Binding TextoNombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"></TextBox>
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,20,20,20">
             <Button x:Name="btnEntrada" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
-                   FontSize="24" Content="ENTRADA" Command="{Binding}" CommandParameter="ENTRADA"></Button>
+                   FontSize="24" Content="ENTRADA" Command="{Binding ComandoEntrar}" CommandParameter="{Binding TextoNombre}"></Button>
             <Rectangle HorizontalAlignment="Center" Width="50" ></Rectangle>
             <Button x:Name="btnSalida" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
-                    FontSize="24" Content="SALIDA" Command="{Binding}" CommandParameter="SALIDA" ></Button>
+                    FontSize="24" Content="SALIDA" Command="{Binding ComandoSalir}" CommandParameter="SALIDA" ></Button>
             <Rectangle HorizontalAlignment="Center" Width="50" ></Rectangle>
             <Button x:Name="btnRegistro" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
-                    FontSize="24" Content="REGISTRO" Command="{Binding}" CommandParameter="REGISTRO" ></Button>
+                    FontSize="24" Content="REGISTRO" Command="{Binding ComandoRegistro}" CommandParameter="REGISTRO" ></Button>
         </StackPanel>
     </Grid>
 </Page>

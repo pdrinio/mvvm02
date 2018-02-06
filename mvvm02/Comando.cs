@@ -11,18 +11,15 @@ namespace mvvm02
     class Comando : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        public event Action<string> HanPulsado;
+        public Action<string> HanPulsado;
 
-        public bool CanExecute(object parameter)
+        public Comando(Action<string> MiAccion)
         {
-            return true;
+            HanPulsado = MiAccion;
         }
 
-        public void Execute(object parameter)
-        {
-            ////var comando = parameter as string;
-            //HanPulsado?.Invoke(comando);
-            HanPulsado?.Invoke(parameter as string);
-        }
+        public bool CanExecute(object parameter) => parameter is string str && !string.IsNullOrWhiteSpace(str) && str.Length > 3;
+        
+        public void Execute(object parameter) => HanPulsado?.Invoke(parameter as string);
     }
 }

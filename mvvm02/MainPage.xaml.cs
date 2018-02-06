@@ -21,18 +21,15 @@ namespace mvvm02
     /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
     public sealed partial class MainPage : Page
-    {
-        Comando _comando;
+    {        
         List<Registro> _registro;
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            _comando = new Comando(); //TODO: ¿cómo se escribe esto en sugar candy?
-            DataContext = _comando;
-
-            _comando.HanPulsado += AccionesBotones.MostrarResultado; //TODO: ¿cómo saco esto de aquí?
+            DataContext = new MainPageViewModel();
+            
             _registro = new List<Registro>();    
                                     
         }
