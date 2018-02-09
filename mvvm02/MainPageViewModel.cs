@@ -35,8 +35,7 @@ namespace mvvm02
             get => _integranteSeleccionado;
             set {
                 _integranteSeleccionado = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IntegranteSeleccionado)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TextoNombre).ToString()));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IntegranteSeleccionado)));                
             }
         }
 
@@ -47,8 +46,17 @@ namespace mvvm02
             ListaIntegrantes = new ObservableCollection<string>();
             _registroService = new RegistroService();
 
-            _registroService.AltaIntegrante += (x) => ListaIntegrantes.Add(x.Nombre);
-            _registroService.SalidaIntegrante += (x) => ListaIntegrantes.Remove(x.Nombre);
+            _registroService.AltaIntegrante += (x) =>
+            {
+                ListaIntegrantes.Add(x.Nombre);
+                IntegranteSeleccionado = x.Nombre;
+            };
+
+            _registroService.SalidaIntegrante += (x) =>
+            {
+                ListaIntegrantes.Remove(x.Nombre);
+                IntegranteSeleccionado = ListaIntegrantes.FirstOrDefault();
+            };
 
             ComandoEntrar = new Comando((str) =>
             {
@@ -64,15 +72,15 @@ namespace mvvm02
             
             ComandoRegistro = new Comando(async (str) => await Dialogos.MuestraDialogo(str));            
 
-            //PropertyChanged += MainPageViewModel_PropertyChanged;
+            PropertyChanged += MainPageViewModel_PropertyChanged;
         }
 
-        //private void MainPageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    if(e.PropertyName == nameof(TextoNombre))
-        //    {
-
-        //    }
-        //}
+        private void MainPageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(IntegranteSeleccionado))
+            {
+                TextoNombre = IntegranteSeleccionado;
+            }
+        }
     }
 }

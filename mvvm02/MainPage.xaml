@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -34,7 +35,9 @@
                     FontSize="24" Content="REGISTRO" Command="{Binding ComandoRegistro}" CommandParameter="REGISTRO" ></Button>
         </StackPanel>
 
-        <ListView Grid.Row="4" x:Name="lstAsistentes" ItemsSource="{Binding ListaIntegrantes}" 
+        <TextBlock x:Name="txbEtiquetaSeleccionado" Grid.Row="4" Text="{Binding ElementName=lstAsistentes, Path=SelectedItem}"></TextBlock>
+        
+        <ListView Grid.Row="5" x:Name="lstAsistentes" ItemsSource="{Binding ListaIntegrantes}" 
                     SelectedItem="{Binding IntegranteSeleccionado, Mode=TwoWay}"></ListView>
         
     </Grid>
