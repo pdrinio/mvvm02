@@ -28,10 +28,14 @@
                    FontSize="24" Content="ENTRADA" Command="{Binding ComandoEntrar}" CommandParameter="{Binding TextoNombre}"></Button>
             <Rectangle HorizontalAlignment="Center" Width="50" ></Rectangle>
             <Button x:Name="btnSalida" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
-                    FontSize="24" Content="SALIDA" Command="{Binding ComandoSalir}" CommandParameter="SALIDA" ></Button>
+                    FontSize="24" Content="SALIDA" Command="{Binding ComandoSalir}" CommandParameter="{Binding TextoNombre}" ></Button>
             <Rectangle HorizontalAlignment="Center" Width="50" ></Rectangle>
             <Button x:Name="btnRegistro" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
                     FontSize="24" Content="REGISTRO" Command="{Binding ComandoRegistro}" CommandParameter="REGISTRO" ></Button>
         </StackPanel>
+
+        <ListView Grid.Row="4" x:Name="lstAsistentes" ItemsSource="{Binding ListaIntegrantes}" 
+                    SelectedItem="{Binding IntegranteSeleccionado, Mode=TwoWay}"></ListView>
+        
     </Grid>
 </Page>

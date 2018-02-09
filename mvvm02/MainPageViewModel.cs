@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -26,30 +27,52 @@ namespace mvvm02
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TextoNombre)));
             }                    
         }
+
+        public ObservableCollection<string> ListaIntegrantes { get; set; }
+
+        private string _integranteSeleccionado;
+        public string IntegranteSeleccionado {
+            get => _integranteSeleccionado;
+            set {
+                _integranteSeleccionado = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IntegranteSeleccionado)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TextoNombre).ToString()));
+            }
+        }
+
         #endregion
 
         public MainPageViewModel()
         {
-            ComandoEntrar = new Comando(async (str) =>
-            {
-                await Dialogos.MuestraDialogo(str);
-                _registroService.RegistroEntrada(str);
-            });
-        
-            ComandoSalir = new Comando(async (str) => await Dialogos.MuestraDialogo(str));
-            ComandoRegistro = new Comando(async (str) => await Dialogos.MuestraDialogo(str));
-
+            ListaIntegrantes = new ObservableCollection<string>();
             _registroService = new RegistroService();
 
-            PropertyChanged += MainPageViewModel_PropertyChanged;
-        }
+            _registroService.AltaIntegrante += (x) => ListaIntegrantes.Add(x.Nombre);
+            _registroService.SalidaIntegrante += (x) => ListaIntegrantes.Remove(x.Nombre);
 
-        private void MainPageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if(e.PropertyName == nameof(TextoNombre))
+            ComandoEntrar = new Comando((str) =>
             {
+                //await Dialogos.MuestraDialogo(str);
+                _registroService.RegistroEntrada(str);
+            });
 
-            }
+            ComandoSalir = new Comando((str) =>
+            {
+                //await Dialogos.MuestraDialogo(str));
+                _registroService.RegistroSalida(str);
+            });
+            
+            ComandoRegistro = new Comando(async (str) => await Dialogos.MuestraDialogo(str));            
+
+            //PropertyChanged += MainPageViewModel_PropertyChanged;
         }
+
+        //private void MainPageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    if(e.PropertyName == nameof(TextoNombre))
+        //    {
+
+        //    }
+        //}
     }
 }
